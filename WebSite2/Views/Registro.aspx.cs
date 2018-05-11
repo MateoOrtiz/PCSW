@@ -56,7 +56,7 @@ public partial class _Default : System.Web.UI.Page
                 }
                 else
                 {
-                    lblresultado.Text = "Ya existe un usuario con el mismo nombre de usuario o identificación.";
+                    lblresultado.Text = "Ya existe un usuario con el mismo nombre de usuario o identificación.........";
                 }
             }
         }

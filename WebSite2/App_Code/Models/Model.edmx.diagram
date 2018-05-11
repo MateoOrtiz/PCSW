@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="633f6331d6a64850b01769951f328c8e" Name="Diagram1">
+        <EntityTypeShape EntityType="PCSWDBModel.Pedidos" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSWDBModel.Personas" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSWDBModel.RegistrosCompra" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSWDBModel.Roles" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSWDBModel.Usuarios" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSWDBModel.UsuariosRol" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSWDBModel.Vehiculos" Width="1.5" PointX="3.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSWDBModel.Ventas" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="PCSWDBModel.FK__Pedidos__IdVehic__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="PCSWDBModel.FK__Personas__IdUsua__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="PCSWDBModel.FK__Registros__IdUsu__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="PCSWDBModel.FK__Registros__IdVeh__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="PCSWDBModel.FK__Ventas__IdRegist__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="PCSWDBModel.FK__UsuariosR__IdRol__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="PCSWDBModel.FK__UsuariosR__IdUsu__145C0A3F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

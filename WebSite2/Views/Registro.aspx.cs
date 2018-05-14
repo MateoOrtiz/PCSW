@@ -11,6 +11,7 @@ public partial class _Default : System.Web.UI.Page
     {
 
     }
+
     protected void Btnguardar_Click(object sender, EventArgs e)
     {
         GestionarUsuario GestionarUser = new GestionarUsuario();
@@ -42,41 +43,45 @@ public partial class _Default : System.Web.UI.Page
             )
         {
 
-
-            if (!validarCampoNumerico(ObjUsuario.Identificacion) || !validarCampoNumerico(ObjUsuario.Telefono) || !validarCampoNumerico(ObjUsuario.NroCuenta))
+            if (!ValidarCampoNumerico(ObjUsuario.Identificacion) || !ValidarCampoNumerico(ObjUsuario.Telefono) || !ValidarCampoNumerico(ObjUsuario.NroCuenta))
             {
-                lblresultado.Text = "Los campos Identificación, Telefono y Número de cuenta son de tipo Numerico";
+                lblresultado.Text = "Los campos Identificación, Telefono y Número de cuenta son de tipo Numerico.";
             }
             else
             {
-                if (!GestionarUser.ValidarUsuarioExiste(ObjUsuario))
+                if (GestionarUser.IsValidEmail(ObjUsuario.Correo))
                 {
-                    GestionarUser.GuardarUsuario(ObjUsuario);
-                    lblresultado.Text = "Usuario registrado con éxito.";
+                    if (!GestionarUser.ValidarUsuarioExiste(ObjUsuario))
+                    {
+                        GestionarUser.GuardarUsuario(ObjUsuario);
+                        lblresultado.Text = "Usuario registrado con éxito.";
+                    }
+                    else
+                    {
+                        lblresultado.Text = "Ya existe un usuario con el mismo nombre de usuario o identificación.";
+                    }
                 }
                 else
                 {
-                    lblresultado.Text = "Ya existe un usuario con el mismo nombre de usuario o identificación.";
+
+                    lblresultado.Text = "Formato de correo invalido.";
                 }
             }
         }
         else
         {
-
             lblresultado.Text = "Todos los campos del formulario son obligatorios.";
         }
 
 
     }
 
-
-    public Boolean validarCampoNumerico(string Numero)
+    public Boolean ValidarCampoNumerico(string Numero)
     {
-
         try
         {
             double Conversion;
-            
+
             Conversion = Convert.ToDouble(Numero);
         }
         catch (Exception ex)

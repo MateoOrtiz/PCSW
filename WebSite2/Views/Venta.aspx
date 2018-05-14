@@ -23,12 +23,17 @@
             <div style="text-align: center">
                 <br />
                 <br />
-                <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                </asp:GridView>
+                <p class="auto-style3">
+            <asp:GridView ID="GridViewCompras" runat="server" OnSelectedIndexChanged="GridViewCompras_SelectedIndexChanged" Width="934px" horizontalalign="Center" CssClass="auto-style2">
+            </asp:GridView>
+        </p>
             </div>
             <div class="auto-style2">
                 <br />
-                <asp:Button ID="Button1" runat="server" Text="salir" Width="90px" OnClick="Button1_Click" />
+                <asp:Label ID="LblResultado" runat="server"></asp:Label>
+                <br />
+                <br />
+                <asp:Button ID="BtnSalir" runat="server" Text="salir" Width="90px" OnClick="Button1_Click" />
                 <br />
                 <br />
                 <br />

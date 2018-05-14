@@ -57,6 +57,7 @@ namespace Models
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> IdVehiculo { get; set; }
         public System.DateTime Fecha { get; set; }
+        public Nullable<bool> Estado { get; set; }
     
         public virtual Usuarios Usuarios { get; set; }
         public virtual Vehiculos Vehiculos { get; set; }
@@ -160,6 +161,49 @@ namespace Models
 {
     using System;
     
+    public partial class SP_ConsultarCompras_Result
+    {
+        public int IdRegistroCompra { get; set; }
+        public System.DateTime FechaPedido { get; set; }
+        public Nullable<bool> Activo { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
+        public decimal Precio { get; set; }
+        public string Identificacion { get; set; }
+        public string Nombre { get; set; }
+        public string Apellidos { get; set; }
+        public string Correo { get; set; }
+        public string Direccion { get; set; }
+        public string NroCuenta { get; set; }
+        public string Telefono { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public partial class SP_ConsultarComprasVencidas_Result
+    {
+        public int Id { get; set; }
+        public Nullable<int> IdVehiculo { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public partial class SP_ConsultarEstadisticasVentas_Result
+    {
+        public Nullable<int> IdVehiculo { get; set; }
+        public Nullable<int> Cantidad { get; set; }
+        public decimal Costo { get; set; }
+        public Nullable<decimal> Total_Ventas { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    
     public partial class SP_ConsultarUsuario_Result
     {
         public int Id { get; set; }
@@ -174,5 +218,41 @@ namespace Models
         public string NroCuenta { get; set; }
         public int RolId { get; set; }
         public string RolName { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public partial class SP_ConsultarVehiculo_Result
+    {
+        public int Id { get; set; }
+        public string Modelo { get; set; }
+        public string Marca { get; set; }
+        public decimal Precio { get; set; }
+        public int Cantidad { get; set; }
+    }
+}
+namespace Models
+{
+    using System;
+    
+    public partial class SP_ConsultarVentas_Result
+    {
+        public int IdVenta { get; set; }
+        public System.DateTime FechaVenta { get; set; }
+        public int IdRegistroCompra { get; set; }
+        public System.DateTime FechaPedido { get; set; }
+        public Nullable<bool> Activo { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
+        public decimal Precio { get; set; }
+        public string Identificacion { get; set; }
+        public string Nombre { get; set; }
+        public string Apellidos { get; set; }
+        public string Correo { get; set; }
+        public string Direccion { get; set; }
+        public string NroCuenta { get; set; }
+        public string Telefono { get; set; }
     }
 }

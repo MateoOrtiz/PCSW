@@ -37,34 +37,81 @@ namespace Models
         public DbSet<Vehiculos> Vehiculos { get; set; }
         public DbSet<Ventas> Ventas { get; set; }
     
-        public virtual int SP_InsertarVehiculo(string modelo, string marca, Nullable<decimal> precio, Nullable<int> cantidad)
+        public virtual int SP_ActualizarEstadoCompra(Nullable<int> idCompra, Nullable<int> idVehiculo)
         {
-            var modeloParameter = modelo != null ?
-                new ObjectParameter("Modelo", modelo) :
-                new ObjectParameter("Modelo", typeof(string));
+            var idCompraParameter = idCompra.HasValue ?
+                new ObjectParameter("IdCompra", idCompra) :
+                new ObjectParameter("IdCompra", typeof(int));
     
-            var marcaParameter = marca != null ?
-                new ObjectParameter("Marca", marca) :
-                new ObjectParameter("Marca", typeof(string));
+            var idVehiculoParameter = idVehiculo.HasValue ?
+                new ObjectParameter("IdVehiculo", idVehiculo) :
+                new ObjectParameter("IdVehiculo", typeof(int));
     
-            var precioParameter = precio.HasValue ?
-                new ObjectParameter("Precio", precio) :
-                new ObjectParameter("Precio", typeof(decimal));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ActualizarEstadoCompra", idCompraParameter, idVehiculoParameter);
+        }
+    
+        public virtual int SP_ActualizarVehiculos(Nullable<int> id, Nullable<int> cantidad)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
     
             var cantidadParameter = cantidad.HasValue ?
                 new ObjectParameter("Cantidad", cantidad) :
                 new ObjectParameter("Cantidad", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertarVehiculo", modeloParameter, marcaParameter, precioParameter, cantidadParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ActualizarVehiculos", idParameter, cantidadParameter);
         }
     
-        public virtual ObjectResult<SP_ConsultarUsuario_Result> SP_ConsultarUsuario(Nullable<int> identificacion)
+        public virtual ObjectResult<SP_ConsultarCompras_Result> SP_ConsultarCompras()
         {
-            var identificacionParameter = identificacion.HasValue ?
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarCompras_Result>("SP_ConsultarCompras");
+        }
+    
+        public virtual ObjectResult<SP_ConsultarComprasVencidas_Result> SP_ConsultarComprasVencidas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarComprasVencidas_Result>("SP_ConsultarComprasVencidas");
+        }
+    
+        public virtual ObjectResult<SP_ConsultarEstadisticasVentas_Result> SP_ConsultarEstadisticasVentas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarEstadisticasVentas_Result>("SP_ConsultarEstadisticasVentas");
+        }
+    
+        public virtual ObjectResult<SP_ConsultarUsuario_Result> SP_ConsultarUsuario(string identificacion)
+        {
+            var identificacionParameter = identificacion != null ?
                 new ObjectParameter("Identificacion", identificacion) :
-                new ObjectParameter("Identificacion", typeof(int));
+                new ObjectParameter("Identificacion", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarUsuario_Result>("SP_ConsultarUsuario", identificacionParameter);
+        }
+    
+        public virtual ObjectResult<SP_ConsultarVehiculo_Result> SP_ConsultarVehiculo(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarVehiculo_Result>("SP_ConsultarVehiculo", idParameter);
+        }
+    
+        public virtual ObjectResult<SP_ConsultarVentas_Result> SP_ConsultarVentas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarVentas_Result>("SP_ConsultarVentas");
+        }
+    
+        public virtual int SP_InsertarCompra(string identificacion, Nullable<int> idVehiculo)
+        {
+            var identificacionParameter = identificacion != null ?
+                new ObjectParameter("Identificacion", identificacion) :
+                new ObjectParameter("Identificacion", typeof(string));
+    
+            var idVehiculoParameter = idVehiculo.HasValue ?
+                new ObjectParameter("IdVehiculo", idVehiculo) :
+                new ObjectParameter("IdVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertarCompra", identificacionParameter, idVehiculoParameter);
         }
     
         public virtual int SP_InsertarUsuario(string identificacion, string nombre, string apellidos, string direccion, string telefono, string nroCuenta, string user, string password, Nullable<int> idRol, string correo)
@@ -110,6 +157,36 @@ namespace Models
                 new ObjectParameter("Correo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertarUsuario", identificacionParameter, nombreParameter, apellidosParameter, direccionParameter, telefonoParameter, nroCuentaParameter, userParameter, passwordParameter, idRolParameter, correoParameter);
+        }
+    
+        public virtual int SP_InsertarVehiculo(string modelo, string marca, Nullable<decimal> precio, Nullable<int> cantidad)
+        {
+            var modeloParameter = modelo != null ?
+                new ObjectParameter("Modelo", modelo) :
+                new ObjectParameter("Modelo", typeof(string));
+    
+            var marcaParameter = marca != null ?
+                new ObjectParameter("Marca", marca) :
+                new ObjectParameter("Marca", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("Precio", precio) :
+                new ObjectParameter("Precio", typeof(decimal));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertarVehiculo", modeloParameter, marcaParameter, precioParameter, cantidadParameter);
+        }
+    
+        public virtual int SP_InsertarVentas(Nullable<int> idRegistroCompra)
+        {
+            var idRegistroCompraParameter = idRegistroCompra.HasValue ?
+                new ObjectParameter("IdRegistroCompra", idRegistroCompra) :
+                new ObjectParameter("IdRegistroCompra", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertarVentas", idRegistroCompraParameter);
         }
     }
 }

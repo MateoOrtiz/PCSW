@@ -35,6 +35,7 @@
           <Property Name="IdUsuario" Type="int" />
           <Property Name="IdVehiculo" Type="int" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="bit" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -161,8 +162,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_ActualizarEstadoCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCompra" Type="int" Mode="In" />
+          <Parameter Name="IdVehiculo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ActualizarVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ConsultarCompras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_ConsultarComprasVencidas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_ConsultarEstadisticasVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_ConsultarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Identificacion" Type="int" Mode="In" />
+          <Parameter Name="Identificacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ConsultarVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ConsultarVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_InsertarCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Identificacion" Type="varchar" Mode="In" />
+          <Parameter Name="IdVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_InsertarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Identificacion" Type="varchar" Mode="In" />
@@ -181,6 +201,9 @@
           <Parameter Name="Marca" Type="varchar" Mode="In" />
           <Parameter Name="Precio" Type="numeric" Mode="In" />
           <Parameter Name="Cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_InsertarVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdRegistroCompra" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="PCSWDBModelStoreContainer">
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
@@ -259,6 +282,7 @@
           <NavigationProperty Name="Usuarios" Relationship="Self.FK__Registros__IdUsu__1CF15040" FromRole="RegistrosCompra" ToRole="Usuarios" />
           <NavigationProperty Name="Vehiculos" Relationship="Self.FK__Registros__IdVeh__1DE57479" FromRole="RegistrosCompra" ToRole="Vehiculos" />
           <NavigationProperty Name="Ventas" Relationship="Self.FK__Ventas__IdRegist__20C1E124" FromRole="RegistrosCompra" ToRole="Ventas" />
+          <Property Name="Estado" Type="Boolean" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -431,14 +455,27 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="UsuariosRol" EntitySet="UsuariosRol" />
           </AssociationSet>
-          <FunctionImport Name="SP_InsertarVehiculo">
-            <Parameter Name="Modelo" Mode="In" Type="String" />
-            <Parameter Name="Marca" Mode="In" Type="String" />
-            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+          <FunctionImport Name="SP_ActualizarEstadoCompra">
+            <Parameter Name="IdCompra" Mode="In" Type="Int32" />
+            <Parameter Name="IdVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ActualizarVehiculos">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
             <Parameter Name="Cantidad" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_ConsultarCompras" ReturnType="Collection(PCSWDBModel.SP_ConsultarCompras_Result)" />
+          <FunctionImport Name="SP_ConsultarComprasVencidas" ReturnType="Collection(PCSWDBModel.SP_ConsultarComprasVencidas_Result)" />
+          <FunctionImport Name="SP_ConsultarEstadisticasVentas" ReturnType="Collection(PCSWDBModel.SP_ConsultarEstadisticasVentas_Result)" />
           <FunctionImport Name="SP_ConsultarUsuario" ReturnType="Collection(PCSWDBModel.SP_ConsultarUsuario_Result)">
-          <Parameter Name="Identificacion" Mode="In" Type="Int32" />
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ConsultarVehiculo" ReturnType="Collection(PCSWDBModel.SP_ConsultarVehiculo_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ConsultarVentas" ReturnType="Collection(PCSWDBModel.SP_ConsultarVentas_Result)" />
+          <FunctionImport Name="SP_InsertarCompra">
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+            <Parameter Name="IdVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_InsertarUsuario">
             <Parameter Name="Identificacion" Mode="In" Type="String" />
@@ -452,7 +489,41 @@
             <Parameter Name="IdRol" Mode="In" Type="Int32" />
             <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_InsertarVehiculo">
+            <Parameter Name="Modelo" Mode="In" Type="String" />
+            <Parameter Name="Marca" Mode="In" Type="String" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InsertarVentas">
+            <Parameter Name="IdRegistroCompra" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SP_ConsultarCompras_Result">
+          <Property Type="Int32" Name="IdRegistroCompra" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPedido" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="String" Name="Marca" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Modelo" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="NroCuenta" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="SP_ConsultarComprasVencidas_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="IdVehiculo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ConsultarEstadisticasVentas_Result">
+          <Property Type="Int32" Name="IdVehiculo" Nullable="true" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="Decimal" Name="Costo" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Total_Ventas" Nullable="true" Precision="38" Scale="0" />
+        </ComplexType>
         <ComplexType Name="SP_ConsultarUsuario_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Usuario" Nullable="true" MaxLength="128" />
@@ -466,6 +537,30 @@
           <Property Type="String" Name="NroCuenta" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="RolId" Nullable="false" />
           <Property Type="String" Name="RolName" Nullable="true" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="SP_ConsultarVehiculo_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Modelo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Marca" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_ConsultarVentas_Result">
+          <Property Type="Int32" Name="IdVenta" Nullable="false" />
+          <Property Type="DateTime" Name="FechaVenta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdRegistroCompra" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPedido" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="String" Name="Marca" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Modelo" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="NroCuenta" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="15" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -500,6 +595,7 @@
           <EntitySetMapping Name="RegistrosCompra">
             <EntityTypeMapping TypeName="PCSWDBModel.RegistrosCompra">
               <MappingFragment StoreEntitySet="RegistrosCompra">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="IdVehiculo" ColumnName="IdVehiculo" />
@@ -553,7 +649,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_InsertarVehiculo" FunctionName="PCSWDBModel.Store.SP_InsertarVehiculo" />
+          <FunctionImportMapping FunctionImportName="SP_ActualizarEstadoCompra" FunctionName="PCSWDBModel.Store.SP_ActualizarEstadoCompra" />
+          <FunctionImportMapping FunctionImportName="SP_ActualizarVehiculos" FunctionName="PCSWDBModel.Store.SP_ActualizarVehiculos" />
+          <FunctionImportMapping FunctionImportName="SP_ConsultarCompras" FunctionName="PCSWDBModel.Store.SP_ConsultarCompras">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PCSWDBModel.SP_ConsultarCompras_Result">
+                <ScalarProperty Name="IdRegistroCompra" ColumnName="IdRegistroCompra" />
+                <ScalarProperty Name="FechaPedido" ColumnName="FechaPedido" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NroCuenta" ColumnName="NroCuenta" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ConsultarComprasVencidas" FunctionName="PCSWDBModel.Store.SP_ConsultarComprasVencidas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PCSWDBModel.SP_ConsultarComprasVencidas_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdVehiculo" ColumnName="IdVehiculo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ConsultarEstadisticasVentas" FunctionName="PCSWDBModel.Store.SP_ConsultarEstadisticasVentas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PCSWDBModel.SP_ConsultarEstadisticasVentas_Result">
+                <ScalarProperty Name="IdVehiculo" ColumnName="IdVehiculo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Total_Ventas" ColumnName="Total_Ventas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_ConsultarUsuario" FunctionName="PCSWDBModel.Store.SP_ConsultarUsuario">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PCSWDBModel.SP_ConsultarUsuario_Result">
@@ -572,7 +706,42 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ConsultarVehiculo" FunctionName="PCSWDBModel.Store.SP_ConsultarVehiculo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PCSWDBModel.SP_ConsultarVehiculo_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ConsultarVentas" FunctionName="PCSWDBModel.Store.SP_ConsultarVentas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PCSWDBModel.SP_ConsultarVentas_Result">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+                <ScalarProperty Name="IdRegistroCompra" ColumnName="IdRegistroCompra" />
+                <ScalarProperty Name="FechaPedido" ColumnName="FechaPedido" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NroCuenta" ColumnName="NroCuenta" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertarCompra" FunctionName="PCSWDBModel.Store.SP_InsertarCompra" />
           <FunctionImportMapping FunctionImportName="SP_InsertarUsuario" FunctionName="PCSWDBModel.Store.SP_InsertarUsuario" />
+          <FunctionImportMapping FunctionImportName="SP_InsertarVehiculo" FunctionName="PCSWDBModel.Store.SP_InsertarVehiculo" />
+          <FunctionImportMapping FunctionImportName="SP_InsertarVentas" FunctionName="PCSWDBModel.Store.SP_InsertarVentas" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -14,7 +14,8 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Btnguardar_Click(object sender, EventArgs e)
     {
-        GestionarUsuario GestionarUser = new GestionarUsuario();
+        
+            GestionarUsuario GestionarUser = new GestionarUsuario();
 
         Usuario ObjUsuario = new Usuario()
         {
@@ -51,7 +52,7 @@ public partial class _Default : System.Web.UI.Page
             {
                 if (GestionarUser.IsValidEmail(ObjUsuario.Correo))
                 {
-                    if (!GestionarUser.ValidarUsuarioExiste(ObjUsuario))
+                    if (GestionarUser.ValidarUsuarioExiste(ObjUsuario))
                     {
                         GestionarUser.GuardarUsuario(ObjUsuario);
                         lblresultado.Text = "Usuario registrado con éxito.";

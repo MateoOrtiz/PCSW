@@ -78,7 +78,7 @@
           <Property Name="IdRegistroCompra" Type="int" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Pedidos__IdVehic__239E4DCF">
+        <Association Name="FK__Pedidos__IdVehic__29572725">
           <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="0..1" />
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -90,7 +90,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Personas__IdUsua__182C9B23">
+        <Association Name="FK__Personas__IdUsua__2A4B4B5E">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Personas" Type="Self.Personas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -102,7 +102,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Registros__IdUsu__1CF15040">
+        <Association Name="FK__Registros__IdUsu__2B3F6F97">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="RegistrosCompra" Type="Self.RegistrosCompra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,7 +114,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Registros__IdVeh__1DE57479">
+        <Association Name="FK__Registros__IdVeh__2C3393D0">
           <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="0..1" />
           <End Role="RegistrosCompra" Type="Self.RegistrosCompra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -126,7 +126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UsuariosR__IdRol__15502E78">
+        <Association Name="FK__UsuariosR__IdRol__2D27B809">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="UsuariosRol" Type="Self.UsuariosRol" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,7 +138,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UsuariosR__IdUsu__145C0A3F">
+        <Association Name="FK__UsuariosR__IdUsu__2E1BDC42">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="UsuariosRol" Type="Self.UsuariosRol" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,7 +150,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ventas__IdRegist__20C1E124">
+        <Association Name="FK__Ventas__IdRegist__2F10007B">
           <End Role="RegistrosCompra" Type="Self.RegistrosCompra" Multiplicity="0..1" />
           <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -162,6 +162,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="PruebaCreada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCompra" Type="int" Mode="In" />
+          <Parameter Name="IdVehiculo" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_ActualizarEstadoCompra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdCompra" Type="int" Mode="In" />
           <Parameter Name="IdVehiculo" Type="int" Mode="In" />
@@ -214,31 +218,31 @@
           <EntitySet Name="UsuariosRol" EntityType="Self.UsuariosRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Pedidos__IdVehic__239E4DCF" Association="Self.FK__Pedidos__IdVehic__239E4DCF">
+          <AssociationSet Name="FK__Pedidos__IdVehic__29572725" Association="Self.FK__Pedidos__IdVehic__29572725">
             <End Role="Vehiculos" EntitySet="Vehiculos" />
             <End Role="Pedidos" EntitySet="Pedidos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Personas__IdUsua__182C9B23" Association="Self.FK__Personas__IdUsua__182C9B23">
+          <AssociationSet Name="FK__Personas__IdUsua__2A4B4B5E" Association="Self.FK__Personas__IdUsua__2A4B4B5E">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Personas" EntitySet="Personas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Registros__IdUsu__1CF15040" Association="Self.FK__Registros__IdUsu__1CF15040">
+          <AssociationSet Name="FK__Registros__IdUsu__2B3F6F97" Association="Self.FK__Registros__IdUsu__2B3F6F97">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="RegistrosCompra" EntitySet="RegistrosCompra" />
           </AssociationSet>
-          <AssociationSet Name="FK__Registros__IdVeh__1DE57479" Association="Self.FK__Registros__IdVeh__1DE57479">
+          <AssociationSet Name="FK__Registros__IdVeh__2C3393D0" Association="Self.FK__Registros__IdVeh__2C3393D0">
             <End Role="Vehiculos" EntitySet="Vehiculos" />
             <End Role="RegistrosCompra" EntitySet="RegistrosCompra" />
           </AssociationSet>
-          <AssociationSet Name="FK__UsuariosR__IdRol__15502E78" Association="Self.FK__UsuariosR__IdRol__15502E78">
+          <AssociationSet Name="FK__UsuariosR__IdRol__2D27B809" Association="Self.FK__UsuariosR__IdRol__2D27B809">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UsuariosRol" EntitySet="UsuariosRol" />
           </AssociationSet>
-          <AssociationSet Name="FK__UsuariosR__IdUsu__145C0A3F" Association="Self.FK__UsuariosR__IdUsu__145C0A3F">
+          <AssociationSet Name="FK__UsuariosR__IdUsu__2E1BDC42" Association="Self.FK__UsuariosR__IdUsu__2E1BDC42">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="UsuariosRol" EntitySet="UsuariosRol" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ventas__IdRegist__20C1E124" Association="Self.FK__Ventas__IdRegist__20C1E124">
+          <AssociationSet Name="FK__Ventas__IdRegist__2F10007B" Association="Self.FK__Ventas__IdRegist__2F10007B">
             <End Role="RegistrosCompra" EntitySet="RegistrosCompra" />
             <End Role="Ventas" EntitySet="Ventas" />
           </AssociationSet>
@@ -467,10 +471,10 @@
           <FunctionImport Name="SP_ConsultarComprasVencidas" ReturnType="Collection(PCSWDBModel.SP_ConsultarComprasVencidas_Result)" />
           <FunctionImport Name="SP_ConsultarEstadisticasVentas" ReturnType="Collection(PCSWDBModel.SP_ConsultarEstadisticasVentas_Result)" />
           <FunctionImport Name="SP_ConsultarUsuario" ReturnType="Collection(PCSWDBModel.SP_ConsultarUsuario_Result)">
-            <Parameter Name="Identificacion" Mode="In" Type="String" />
+          <Parameter Name="Identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_ConsultarVehiculo" ReturnType="Collection(PCSWDBModel.SP_ConsultarVehiculo_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_ConsultarVentas" ReturnType="Collection(PCSWDBModel.SP_ConsultarVentas_Result)" />
           <FunctionImport Name="SP_InsertarCompra">
@@ -496,7 +500,11 @@
             <Parameter Name="Cantidad" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_InsertarVentas">
-            <Parameter Name="IdRegistroCompra" Mode="In" Type="Int32" />
+          <Parameter Name="IdRegistroCompra" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PruebaCreada">
+            <Parameter Name="IdCompra" Mode="In" Type="Int32" />
+            <Parameter Name="IdVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_ConsultarCompras_Result">
@@ -742,6 +750,7 @@
           <FunctionImportMapping FunctionImportName="SP_InsertarUsuario" FunctionName="PCSWDBModel.Store.SP_InsertarUsuario" />
           <FunctionImportMapping FunctionImportName="SP_InsertarVehiculo" FunctionName="PCSWDBModel.Store.SP_InsertarVehiculo" />
           <FunctionImportMapping FunctionImportName="SP_InsertarVentas" FunctionName="PCSWDBModel.Store.SP_InsertarVentas" />
+          <FunctionImportMapping FunctionImportName="PruebaCreada" FunctionName="PCSWDBModel.Store.PruebaCreada" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

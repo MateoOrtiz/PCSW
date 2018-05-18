@@ -188,5 +188,18 @@ namespace Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertarVentas", idRegistroCompraParameter);
         }
+    
+        public virtual int PruebaCreada(Nullable<int> idCompra, Nullable<int> idVehiculo)
+        {
+            var idCompraParameter = idCompra.HasValue ?
+                new ObjectParameter("IdCompra", idCompra) :
+                new ObjectParameter("IdCompra", typeof(int));
+    
+            var idVehiculoParameter = idVehiculo.HasValue ?
+                new ObjectParameter("IdVehiculo", idVehiculo) :
+                new ObjectParameter("IdVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PruebaCreada", idCompraParameter, idVehiculoParameter);
+        }
     }
 }

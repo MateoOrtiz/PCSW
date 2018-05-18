@@ -9,11 +9,11 @@ using System.Web;
 
 public class GestionarUsuario
 {
-    bool invalid = false;
+    bool invalid = true;
     //Validacion de formato de correo valido
     public bool IsValidEmail(string strIn)
     {
-        invalid = false;
+        invalid = true;
         if (String.IsNullOrEmpty(strIn))
             return false;
 
@@ -28,9 +28,10 @@ public class GestionarUsuario
             return false;
         }
 
-        if (invalid)
+        if (!invalid)
+        {
             return false;
-
+        }
         // Return true if strIn is in valid email format.
         try
         {
@@ -58,7 +59,7 @@ public class GestionarUsuario
         }
         catch (ArgumentException)
         {
-            invalid = true;
+            invalid = false;
         }
         return match.Groups[1].Value + domainName;
     }
@@ -85,7 +86,7 @@ public class GestionarUsuario
 
     public bool ValidarUsuarioExiste(Usuario User)
     {
-        Boolean Resultado = false;
+        Boolean Resultado = true;
         try
         {
             using (Models.PCSWDBEntities ObjectBD = new Models.PCSWDBEntities())
@@ -93,13 +94,13 @@ public class GestionarUsuario
                 List<Models.SP_ConsultarUsuario_Result> LstUsuarios = ObjectBD.SP_ConsultarUsuario(null).ToList();
 
                 var UsersFound = LstUsuarios.Where(x => x.Usuario.ToLower() == User.User.ToLower() || x.Identificacion == User.Identificacion).ToList();
-                Resultado = (UsersFound.Count > 0) ? true : false;
+                Resultado = (UsersFound.Count > 0) ? false : true;
             }
         }
         catch (Exception e)
         {
             string Mensaje = e.Message;
-            Resultado = true;
+            Resultado = false;
         }
 
         return Resultado;

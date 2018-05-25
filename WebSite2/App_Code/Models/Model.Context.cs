@@ -63,19 +63,9 @@ namespace Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ActualizarVehiculos", idParameter, cantidadParameter);
         }
     
-        public virtual ObjectResult<SP_ConsultarCompras_Result> SP_ConsultarCompras()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarCompras_Result>("SP_ConsultarCompras");
-        }
-    
         public virtual ObjectResult<SP_ConsultarComprasVencidas_Result> SP_ConsultarComprasVencidas()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarComprasVencidas_Result>("SP_ConsultarComprasVencidas");
-        }
-    
-        public virtual ObjectResult<SP_ConsultarEstadisticasVentas_Result> SP_ConsultarEstadisticasVentas()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarEstadisticasVentas_Result>("SP_ConsultarEstadisticasVentas");
         }
     
         public virtual ObjectResult<SP_ConsultarUsuario_Result> SP_ConsultarUsuario(string identificacion)
@@ -200,6 +190,16 @@ namespace Models
                 new ObjectParameter("IdVehiculo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PruebaCreada", idCompraParameter, idVehiculoParameter);
+        }
+    
+        public virtual ObjectResult<SP_ConsultarCompras_Result> SP_ConsultarCompras()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarCompras_Result>("SP_ConsultarCompras");
+        }
+    
+        public virtual ObjectResult<SP_ConsultarEstadisticasVentas_Result> SP_ConsultarEstadisticasVentas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ConsultarEstadisticasVentas_Result>("SP_ConsultarEstadisticasVentas");
         }
     }
 }

@@ -13,6 +13,7 @@
         }
         .auto-style3 {
             font-size: x-large;
+            text-align: center;
         }
         .auto-style4 {
             font-size: xx-large;
@@ -56,6 +57,13 @@
         <p class="auto-style2">
             <asp:Label ID="LblResultado" runat="server"></asp:Label>
         </p>
+
+        <div class="auto-style3">
+                    &nbsp;
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Views/Venta.aspx">Registros de compra</asp:HyperLink>
+
+            </div>
+
         <p class="auto-style2">
             &nbsp;</p>
         <p class="auto-style2">

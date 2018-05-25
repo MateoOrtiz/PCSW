@@ -10,6 +10,9 @@ using System.Web;
 /// </summary>
 public class GestionarCompra
 {
+
+
+
     public List<Models.SP_ConsultarCompras_Result> ConsultarCompras()
     {
         List<Models.SP_ConsultarCompras_Result> LstCompras;
@@ -17,6 +20,9 @@ public class GestionarCompra
         {
             using (Models.PCSWDBEntities ObjectBD = new Models.PCSWDBEntities())
             {
+                GestionarCompra GestCompra = new GestionarCompra();
+                //Actualizar Estado Compras
+                GestCompra.ActualizarEstadosCompra();
                 LstCompras = ObjectBD.SP_ConsultarCompras().ToList();
             }
         }

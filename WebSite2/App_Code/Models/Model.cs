@@ -195,6 +195,8 @@ namespace Models
     public partial class SP_ConsultarEstadisticasVentas_Result
     {
         public Nullable<int> IdVehiculo { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
         public Nullable<int> Cantidad { get; set; }
         public decimal Costo { get; set; }
         public Nullable<decimal> Total_Ventas { get; set; }

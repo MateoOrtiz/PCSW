@@ -14,6 +14,9 @@
         .auto-style2 {
             text-align: center;
         }
+        .auto-style3 {
+            font-size: large;
+        }
     </style>
 </head>
 <body>
@@ -29,9 +32,23 @@
         </p>
             </div>
             <div class="auto-style2">
+                <strong><span class="auto-style3">Generar factura de compra</span></strong><br />
+                <br />
+                Id de compra&nbsp;&nbsp;
+                <asp:TextBox ID="txtIdcompra" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="BtnFacturar" runat="server" OnClick="BtnFacturar_Click" Text="Facturar" />
+                <br />
+                <br />
                 <br />
                 <asp:Label ID="LblResultado" runat="server"></asp:Label>
                 <br />
+                <br />
+                <div class="auto-style3">
+                    &nbsp;
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Views/Estadisticas.aspx">Ver estadísticas de venta</asp:HyperLink>
+
+            </div>
                 <br />
                 <asp:Button ID="BtnSalir" runat="server" Text="salir" Width="90px" OnClick="Button1_Click" />
                 <br />

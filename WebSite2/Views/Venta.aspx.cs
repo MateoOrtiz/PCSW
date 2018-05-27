@@ -83,7 +83,7 @@ public partial class Venta : System.Web.UI.Page
 
                 LblResultado.Text = "Venta de vehículo realizada con éxito..";
 
-                
+                //Guardar lod datos en archivo plano
 
             }
             else {

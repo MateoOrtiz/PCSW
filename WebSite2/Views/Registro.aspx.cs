@@ -65,7 +65,7 @@ public partial class _Default : System.Web.UI.Page
                 else
                 {
 
-                    lblresultado.Text = "Formato de correo invalido.";
+                    lblresultado.Text = "Formato de correo inválido.";
                 }
             }
         }

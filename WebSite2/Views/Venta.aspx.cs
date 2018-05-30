@@ -88,6 +88,9 @@ public partial class Venta : System.Web.UI.Page
                 int rowcount = GridViewCompras.Rows.Count;
                 for (int i = 0; i < rowcount; i++)
                 {
+                    if(GridViewCompras.Rows[i].Cells[0].Text == txtIdcompra.Text)
+                    {
+
                     sw.WriteLine(Environment.NewLine + "Identifiación del registro de compra: " + GridViewCompras.Rows[i].Cells[0].Text + "\t"
                                  + Environment.NewLine + "Fecha del pedido: " + GridViewCompras.Rows[i].Cells[1].Text + "\t"
                                  + Environment.NewLine + "Vehículo activo" + GridViewCompras.Rows[i].Cells[2].Text + "\t"
@@ -103,6 +106,9 @@ public partial class Venta : System.Web.UI.Page
                                  + Environment.NewLine + "Teléfono: " + GridViewCompras.Rows[i].Cells[12].Text + "\t"
                                  + Environment.NewLine + Environment.NewLine +"      MUCHAS GRACIAS POR SU COMPRA :)"
                                  + Environment.NewLine + Environment.NewLine);
+
+                    }
+
                 }
                 sw.Close();
                 //Mensaje de éxito

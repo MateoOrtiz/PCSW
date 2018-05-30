@@ -40,6 +40,7 @@
                 <asp:Button ID="BtnFacturar" runat="server" OnClick="BtnFacturar_Click" Text="Facturar" />
                 <br />
                 <br />
+                <asp:Label ID="LblResultado2" runat="server"></asp:Label>
                 <br />
                 <asp:Label ID="LblResultado" runat="server"></asp:Label>
                 <br />

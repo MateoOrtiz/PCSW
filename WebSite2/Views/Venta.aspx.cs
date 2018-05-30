@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using System.IO;
 
 public partial class Venta : System.Web.UI.Page
 {
@@ -76,15 +77,40 @@ public partial class Venta : System.Web.UI.Page
 
                 //Refrescar vista
                 GridViewCompras.DataSource = LstCompras;
-
-                Page_Load(sender, e);
-
-                GridViewCompras.DataBind();
-
-                LblResultado.Text = "Venta de vehículo realizada con éxito..";
-
+                //
                 //Guardar lod datos en archivo plano
+                if (!Directory.Exists(@"C:\Users\da_ni\OneDrive\Documents\Semester number 8 supposedly\Proyecto construcción de software\Proyecto de proyecto"))
+                {
+                    Directory.CreateDirectory(@"C:\Users\da_ni\OneDrive\Documents\Semester number 8 supposedly\Proyecto construcción de software\Proyecto de proyecto");
+                }
 
+                TextWriter sw = new StreamWriter(@"C:\Users\da_ni\OneDrive\Documents\Semester number 8 supposedly\Proyecto construcción de software\Proyecto de proyecto\Factura.txt");
+                int rowcount = GridViewCompras.Rows.Count;
+                for (int i = 0; i < rowcount; i++)
+                {
+                    sw.WriteLine(Environment.NewLine + "Identifiación del registro de compra: " + GridViewCompras.Rows[i].Cells[0].Text + "\t"
+                                 + Environment.NewLine + "Fecha del pedido: " + GridViewCompras.Rows[i].Cells[1].Text + "\t"
+                                 + Environment.NewLine + "Vehículo activo" + GridViewCompras.Rows[i].Cells[2].Text + "\t"
+                                 + Environment.NewLine + "Marca: " + GridViewCompras.Rows[i].Cells[3].Text + "\t"
+                                 + Environment.NewLine + "Modelo: " + GridViewCompras.Rows[i].Cells[4].Text + "\t"
+                                 + Environment.NewLine + Environment.NewLine + "Valor a pagar: " + GridViewCompras.Rows[i].Cells[5].Text + "\t"
+                                 + Environment.NewLine + Environment.NewLine + "Información del cliente" + Environment.NewLine + "Identificación: " + GridViewCompras.Rows[i].Cells[6].Text + "\t"
+                                 + Environment.NewLine + Environment.NewLine + "Nombre: " + GridViewCompras.Rows[i].Cells[7].Text + "\t"
+                                 + Environment.NewLine + "Apellidos: " + GridViewCompras.Rows[i].Cells[8].Text + "\t"
+                                 + Environment.NewLine + "Correo: " + GridViewCompras.Rows[i].Cells[9].Text + "\t"
+                                 + Environment.NewLine + "Dirección: " + GridViewCompras.Rows[i].Cells[10].Text + "\t"
+                                 + Environment.NewLine + "Número de cuenta: " + GridViewCompras.Rows[i].Cells[11].Text + "\t"
+                                 + Environment.NewLine + "Teléfono: " + GridViewCompras.Rows[i].Cells[12].Text + "\t"
+                                 + Environment.NewLine + Environment.NewLine +"      MUCHAS GRACIAS POR SU COMPRA :)"
+                                 + Environment.NewLine + Environment.NewLine);
+                }
+                sw.Close();
+                //Mensaje de éxito
+                LblResultado.Text = "Factura exportada a un archivo plano.";
+                //
+                Page_Load(sender, e);
+                GridViewCompras.DataBind();
+                LblResultado.Text = "Venta de vehículo realizada con éxito..";                
             }
             else {
                 LblResultado.Text = "El Id de compra no está activo.";
